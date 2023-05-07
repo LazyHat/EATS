@@ -11,7 +11,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DropdownMenu
@@ -62,6 +64,7 @@ fun UserPage(viewModel: UserViewModel = hiltViewModel()) {
     val onEvent: (e: UserEvent) -> Unit = { viewModel.createEvent(it) }
     var orientation by remember { mutableStateOf(Configuration.ORIENTATION_PORTRAIT) }
     val configuration = LocalConfiguration.current
+    val scrollState = rememberScrollState()
     LaunchedEffect(key1 = configuration) {
         snapshotFlow { configuration.orientation }.collect { orientation = it }
     }
@@ -70,6 +73,7 @@ fun UserPage(viewModel: UserViewModel = hiltViewModel()) {
             Modifier
                 .fillMaxSize()
                 .padding(padding)
+                .verticalScroll(scrollState)
         ) {
             when (orientation) {
                 Configuration.ORIENTATION_LANDSCAPE -> LandScapeLayout(
