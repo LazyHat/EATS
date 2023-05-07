@@ -1,6 +1,7 @@
 package com.example.eats.data.products.db
 
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Upsert
 import com.example.eats.data.products.db.infos.INFO_TN
@@ -23,6 +24,6 @@ interface ProductDao {
     @Query("SELECT * FROM $INFO_TN")
     fun getAllInfosStream(): Flow<List<LocalInfo>>
 
-    @Upsert(entity = LocalInfo::class)
-    suspend fun upsertInfo(item: LocalInfo)
+    @Insert(entity = LocalInfo::class)
+    suspend fun insertInfo(item: LocalInfo)
 }

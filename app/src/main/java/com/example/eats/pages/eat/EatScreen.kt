@@ -44,7 +44,7 @@ fun EatScreen(
                 moveToAddInfo = { navController.navigate(EatPages.AddInfo.name) })
         }
         composable(EatPages.AddInfo.name) {
-            AddInfoPage()
+            AddInfoPage(){navController.navigateUp()}
         }
     }
 }

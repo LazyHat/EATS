@@ -48,6 +48,10 @@ class DefaultProductsRepository(
             getAllProductInfoStream().first()
         }
 
+    override suspend fun insertProductInfo(new: ProductInfo) {
+        productDao.insertInfo(new.toLocal())
+    }
+
     private fun getAllProductInfoStream(): Flow<List<ProductInfo>> =
         productDao.getAllInfosStream().map { data ->
             data.map { it.toExternal() }.toMutableList().apply {

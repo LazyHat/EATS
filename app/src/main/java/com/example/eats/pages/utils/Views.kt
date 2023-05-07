@@ -244,13 +244,15 @@ fun EATSTextField(
         textStyle = style,
         keyboardOptions = keyboardOptions,
         interactionSource = interactionSource,
+        cursorBrush = SolidColor(if (focused) Color.Black else Color.Unspecified),
         decorationBox = {
             Column(Modifier.width(width)) {
                 label?.invoke()
-                if (!focused && value.isEmpty())
-                    Text(text = hintText, style = style, color = Color.Gray.copy(alpha = 0.5f))
-                else
+                Box(Modifier.padding(start = 5.dp)) {
+                    if (!focused && value.isEmpty())
+                        Text(text = hintText, style = style, color = Color.Gray.copy(alpha = 0.5f))
                     it()
+                }
                 Box(
                     Modifier
                         .height(2.dp)

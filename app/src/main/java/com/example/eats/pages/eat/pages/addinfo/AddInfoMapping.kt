@@ -1,8 +1,11 @@
 package com.example.eats.pages.eat.pages.addinfo
 
 import android.os.Bundle
+import com.example.eats.data.products.NutritionFacts
+import com.example.eats.data.products.ProductInfo
 import com.example.eats.pages.eat.getFieldState
 import com.example.eats.pages.eat.putFieldState
+import kotlin.random.Random
 
 const val LABEL_KEY = "label_b"
 const val CALORIES_KEY = "cal_b"
@@ -27,3 +30,15 @@ fun Bundle.toAddInfoState(): AddInfoState = this.let {
         it.getFieldState(CARBOHYDRATES_KEY)
     )
 }
+
+fun AddInfoState.toProductInfo(): ProductInfo = ProductInfo(
+    id = Random.nextInt().toString(),
+    label = label.value,
+    nutrition100 = NutritionFacts(
+        calories = calories.value.toFloat(),
+        proteins = proteins.value.toFloat(),
+        fats = fats.value.toFloat(),
+        carbohydrates = carbohydrates.value.toFloat()
+    ),
+    null
+)

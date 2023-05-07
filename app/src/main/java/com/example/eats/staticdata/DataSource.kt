@@ -25,65 +25,6 @@ object DataSource {
             "Печенье Юбилейное",
             NutritionFacts(477f, 7.1f, 21f, 65f),
             null
-        ),
-        ProductInfo(
-            "Ubileinoe2",
-            "Печенье Юбилейное2",
-            NutritionFacts(477f, 7.1f, 21f, 65f),
-            null
-        ),
-        ProductInfo(
-            "Ubileinoe3",
-            "Печенье Юбилейное3",
-            NutritionFacts(477f, 7.1f, 21f, 65f),
-            null
-        ),
-        ProductInfo(
-            "Ubileinoe4",
-            "Печенье Юбилейное4",
-            NutritionFacts(477f, 7.1f, 21f, 65f),
-            null
-        ),
-        ProductInfo(
-            "Ubileinoe5",
-            "Печенье Юбилейное5",
-            NutritionFacts(477f, 7.1f, 21f, 65f),
-            null
-        ),
-        ProductInfo(
-            "Ubileinoe6",
-            "Печенье Юбилейное6",
-            NutritionFacts(477f, 7.1f, 21f, 65f),
-            null
-        ),ProductInfo(
-            "Ubileinoe7",
-            "Печенье Юбилейное4",
-            NutritionFacts(477f, 7.1f, 21f, 65f),
-            null
-        ),
-        ProductInfo(
-            "Ubileinoe8",
-            "Печенье Юбилейное5",
-            NutritionFacts(477f, 7.1f, 21f, 65f),
-            null
-        ),
-        ProductInfo(
-            "Ubileinoe9",
-            "Печенье Юбилейное6",
-            NutritionFacts(477f, 7.1f, 21f, 65f),
-            null
-        ),
-        ProductInfo(
-            "Ubileinoe10",
-            "Печенье Юбилейное5",
-            NutritionFacts(477f, 7.1f, 21f, 65f),
-            null
-        ),
-        ProductInfo(
-            "Ubileinoe11",
-            "Печенье Юбилейное6",
-            NutritionFacts(477f, 7.1f, 21f, 65f),
-            null
         )
     )
 

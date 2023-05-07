@@ -9,4 +9,5 @@ interface ProductRepository {
     suspend fun deleteProduct(time: EatTime, product: ProductState)
     fun getUnusedInfoStream(time: EatTime): Flow<List<ProductInfo>>
     suspend fun getAllProductsInfo(): List<ProductInfo>
+    suspend fun insertProductInfo(new: ProductInfo)
 }
