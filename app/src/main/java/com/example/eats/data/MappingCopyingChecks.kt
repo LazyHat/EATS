@@ -5,6 +5,7 @@ import com.example.eats.data.products.ProductInfo
 import com.example.eats.data.products.ProductState
 import com.example.eats.data.products.db.day.DateTime
 import com.example.eats.data.products.db.day.Day
+import com.example.eats.data.products.db.day.LocalDay
 import com.example.eats.data.products.db.infos.LocalInfo
 import com.example.eats.data.products.db.products.LocalProduct
 import com.example.eats.data.userdata.LocalUser
@@ -13,6 +14,8 @@ import com.example.eats.pages.eat.EatTime
 import com.example.eats.pages.eat.pages.ResultDialogState
 import com.example.eats.pages.home.HomeEatBoxState
 import com.example.eats.pages.home.HomeState
+import com.example.eats.staticdata.DataSource.df
+import kotlinx.serialization.json.Json
 
 fun LocalUser.toExternal(): User =
     User(
@@ -108,5 +111,28 @@ fun Day.toHomeState(): HomeState {
 }
 
 fun DateTime?.toString(): String = if (this == null) "Сегодня"
-else "${this.day}.${this.month}.${this.year}"
+else "${if (this.day < 10) "0${this.day}" else this.day}.${if (this.month < 10) "0${this.month}" else this.month}.${this.year}"
 
+fun DateTime.encodeToString(): String = Json.encodeToString(DateTime.serializer(), this)
+fun String.decodeToDateTime(): DateTime = Json.decodeFromString(DateTime.serializer(), this)
+
+fun List<Float>.encodeToString(): String = this.joinToString(separator = "-") {
+   df.format(it).replace(',', '.')
+}
+
+fun String.decodeToListFloat(): List<Float> = this.split('-').map { it.toFloat() }
+
+
+fun LocalDay.toDay(): Day = Day(
+    time = this.time.decodeToDateTime(),
+    caloriesDay,
+    currentCalories,
+    eatBoxCalories.decodeToListFloat()
+)
+
+fun Day.toLocal(): LocalDay = LocalDay(
+    this.time.encodeToString(),
+    caloriesDay,
+    caloriesCurrent,
+    eatBoxCalories.encodeToString()
+)

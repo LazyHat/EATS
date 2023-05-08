@@ -1,6 +1,7 @@
 package com.example.eats.di
 
 import android.content.Context
+import androidx.work.WorkManager
 import com.example.eats.data.products.DefaultProductsRepository
 import com.example.eats.data.products.ProductRepository
 import com.example.eats.data.products.db.ProductDao
@@ -24,8 +25,8 @@ object MainModule {
 
     @Singleton
     @Provides
-    fun provideProductRepository(dao: ProductDao): ProductRepository =
-        DefaultProductsRepository(dao)
+    fun provideProductRepository(dao: ProductDao, workManager: WorkManager): ProductRepository =
+        DefaultProductsRepository(dao, workManager)
 
     @Singleton
     @Provides
@@ -35,6 +36,10 @@ object MainModule {
     @Singleton
     @Provides
     fun provideProductDao(db: ProductDataBase): ProductDao = db.productDao()
+
+    @Singleton
+    @Provides
+    fun provideWorkManager(@ApplicationContext context: Context) = WorkManager.getInstance(context)
 }
 
 @Module

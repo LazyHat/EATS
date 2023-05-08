@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "1994b1adca9232063ca5c19042ce3461",
+    "identityHash": "80975b0170826d5b9c1d2808ba0ae43d",
     "entities": [
       {
         "tableName": "products",
@@ -92,12 +92,50 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "days_db",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`time` TEXT NOT NULL, `caloriesDay` REAL NOT NULL, `currentCalories` REAL NOT NULL, `eatBoxCalories` TEXT NOT NULL, PRIMARY KEY(`time`))",
+        "fields": [
+          {
+            "fieldPath": "time",
+            "columnName": "time",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "caloriesDay",
+            "columnName": "caloriesDay",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "currentCalories",
+            "columnName": "currentCalories",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "eatBoxCalories",
+            "columnName": "eatBoxCalories",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "time"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1994b1adca9232063ca5c19042ce3461')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '80975b0170826d5b9c1d2808ba0ae43d')"
     ]
   }
 }

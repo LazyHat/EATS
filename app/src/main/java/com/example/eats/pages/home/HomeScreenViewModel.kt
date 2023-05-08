@@ -18,7 +18,7 @@ data class HomeScreenState(
 class HomeScreenViewModel @Inject constructor(
     productRepository: ProductRepository
 ) : ViewModel() {
-    val uiState = productRepository.getAllDaysStream().map {
+    val uiState = productRepository.getPrevDaysStream().map {
         HomeScreenState(
             it.map { day ->
                 day.toHomeState()

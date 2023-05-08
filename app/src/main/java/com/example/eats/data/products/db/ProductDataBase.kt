@@ -4,11 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.eats.data.products.db.day.LocalDay
 import com.example.eats.data.products.db.infos.LocalInfo
 import com.example.eats.data.products.db.products.LocalProduct
 
 @Database(
-    entities = [LocalProduct::class, LocalInfo::class],
+    entities = [LocalProduct::class, LocalInfo::class, LocalDay::class],
     version = 1,
     exportSchema = true
 )
