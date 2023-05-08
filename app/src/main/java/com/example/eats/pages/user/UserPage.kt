@@ -119,9 +119,10 @@ private fun LandScapeLayout(uiState: UserState, onEvent: (e: UserEvent) -> Unit)
 private fun PortraitLayout(uiState: UserState, onEvent: (e: UserEvent) -> Unit) {
     Column(
         Modifier
-            .fillMaxSize(),
+            .fillMaxWidth()
+            .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceAround
+        verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
         TextFieldHeight(state = uiState.height, onEvent = onEvent)
         TextFieldAge(state = uiState.age, onEvent = onEvent)

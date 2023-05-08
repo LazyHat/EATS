@@ -2,6 +2,8 @@ package com.example.eats.staticdata
 
 import com.example.eats.data.products.NutritionFacts
 import com.example.eats.data.products.ProductInfo
+import com.example.eats.data.products.db.day.DateTime
+import com.example.eats.data.products.db.day.Day
 import com.example.eats.data.userdata.Gender
 import com.example.eats.data.userdata.User
 import java.math.RoundingMode
@@ -34,6 +36,24 @@ object DataSource {
         "Ешьте больше овощей"
     )
     val df = DecimalFormat("#.#").apply { roundingMode = RoundingMode.CEILING }
+    val days = listOf(
+        Day(
+            DateTime(2023, 5, 6), 2300.5f, 2330.5f, listOf(
+                800f,
+                600f,
+                400f,
+                300f,
+            )
+        ),
+        Day(
+            DateTime(2023, 5, 5), 2400.5f, 2330.5f, listOf(
+                800f,
+                600f,
+                400f,
+                300f,
+            )
+        )
+    )
 }
 
 fun User.getCaloriesToEat(): Float = this.run {

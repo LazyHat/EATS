@@ -20,8 +20,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.eats.R
+import com.example.eats.data.toString
 import com.example.eats.pages.eat.EatTime
 import com.example.eats.pages.utils.TopBar
 import com.example.eats.staticdata.DataSource.df
@@ -41,13 +42,11 @@ import com.example.eats.ui.theme.EATSTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomePage(
-    viewModel: HomePageViewModel = hiltViewModel(),
-    moveToEat: (time: EatTime) -> Unit
+    uiState: State<HomeState> = (hiltViewModel() as HomePageViewModel).uiState.collectAsState(),
+    moveToEat: ((time: EatTime) -> Unit)?
 ) {
-    val uiState by viewModel.uiState.collectAsState()
-
     Scaffold(topBar = {
-        TopBar(label = stringResource(id = R.string.page_home_label))
+        TopBar(label = "${stringResource(id = R.string.page_home_label)} - ${uiState.value.date.toString()}")
     }) { padding ->
         LazyColumn(
             Modifier
@@ -60,13 +59,13 @@ fun HomePage(
         ) {
             item {
                 CaloriesCard(
-                    uiState.caloriesDay,
-                    uiState.needCalories,
-                    uiState.currentCalories
+                    uiState.value.caloriesDay,
+                    uiState.value.needCalories,
+                    uiState.value.currentCalories
                 )
             }
 
-            items(uiState.eatBoxes) {
+            items(uiState.value.eatBoxes) {
                 EatTimeCard(it, moveToEat)
             }
         }
@@ -134,12 +133,15 @@ private fun CaloriesCard(
 }
 
 @Composable
-private fun EatTimeCard(state: HomeEatBoxState, onClickBox: (time: EatTime) -> Unit) {
+private fun EatTimeCard(state: HomeEatBoxState, onClickBox: ((time: EatTime) -> Unit)?) {
     Card(
         Modifier
             .fillMaxWidth()
-            .height(80.dp)
-            .clickable { onClickBox(state.time) },
+            .height(80.dp).let {
+                if (onClickBox != null)
+                    it.clickable { onClickBox.invoke(state.time) }
+                else it
+            },
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
         shape = RoundedCornerShape(5.dp)
     ) {

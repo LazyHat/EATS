@@ -2,6 +2,7 @@ package com.example.eats.data.products
 
 import com.example.eats.data.filter
 import com.example.eats.data.products.db.ProductDao
+import com.example.eats.data.products.db.day.Day
 import com.example.eats.data.products.db.products.LocalProduct
 import com.example.eats.data.toExternal
 import com.example.eats.data.toLocal
@@ -10,6 +11,7 @@ import com.example.eats.staticdata.DataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -50,6 +52,10 @@ class DefaultProductsRepository(
 
     override suspend fun insertProductInfo(new: ProductInfo) {
         productDao.insertInfo(new.toLocal())
+    }
+
+    override fun getAllDaysStream(): Flow<List<Day>> {
+        return MutableStateFlow(DataSource.days)
     }
 
     private fun getAllProductInfoStream(): Flow<List<ProductInfo>> =

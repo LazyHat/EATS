@@ -13,7 +13,7 @@ import androidx.navigation.navArgument
 import com.example.eats.R
 import com.example.eats.pages.eat.EatScreen
 import com.example.eats.pages.eat.EatTime
-import com.example.eats.pages.home.HomePage
+import com.example.eats.pages.home.HomeScreen
 import com.example.eats.pages.recs.RecsPage
 import com.example.eats.pages.user.UserPage
 import com.example.eats.pages.water.WaterPage
@@ -44,7 +44,7 @@ fun EATSNavGraph(
         navController = navController
     ) {
         composable(Pages.Home.name) {
-            HomePage { navActions.navigateToEat(it) }
+           HomeScreen{ navActions.navigateToEat(it) }
         }
         composable(
             "${Pages.Eat.name}?$TIME_ARG={$TIME_ARG}",

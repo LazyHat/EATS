@@ -1,5 +1,6 @@
 package com.example.eats.data.products
 
+import com.example.eats.data.products.db.day.Day
 import com.example.eats.pages.eat.EatTime
 import kotlinx.coroutines.flow.Flow
 
@@ -10,4 +11,5 @@ interface ProductRepository {
     fun getUnusedInfoStream(time: EatTime): Flow<List<ProductInfo>>
     suspend fun getAllProductsInfo(): List<ProductInfo>
     suspend fun insertProductInfo(new: ProductInfo)
+    fun getAllDaysStream(): Flow<List<Day>>
 }

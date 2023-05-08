@@ -3,12 +3,16 @@ package com.example.eats.data
 import com.example.eats.data.products.NutritionFacts
 import com.example.eats.data.products.ProductInfo
 import com.example.eats.data.products.ProductState
+import com.example.eats.data.products.db.day.DateTime
+import com.example.eats.data.products.db.day.Day
 import com.example.eats.data.products.db.infos.LocalInfo
 import com.example.eats.data.products.db.products.LocalProduct
 import com.example.eats.data.userdata.LocalUser
 import com.example.eats.data.userdata.User
 import com.example.eats.pages.eat.EatTime
 import com.example.eats.pages.eat.pages.ResultDialogState
+import com.example.eats.pages.home.HomeEatBoxState
+import com.example.eats.pages.home.HomeState
 
 fun LocalUser.toExternal(): User =
     User(
@@ -70,4 +74,39 @@ fun ProductInfo.toLocal(): LocalInfo = LocalInfo(
     nutrition100.carbohydrates,
     pieceWeight
 )
+
+fun Day.toHomeState(): HomeState {
+    require(this.eatBoxCalories.size == 4) { "EAT BOX SIZE NOT 4" }
+    return HomeState(
+        date = this.time,
+        this.caloriesDay,
+        this.caloriesCurrent,
+        this.caloriesDay - this.caloriesCurrent,
+        listOf(
+            HomeEatBoxState(
+                EatTime.BreakFast,
+                this.eatBoxCalories[0] / this.caloriesDay * 100,
+                this.eatBoxCalories[0]
+            ),
+            HomeEatBoxState(
+                EatTime.Lunch,
+                this.eatBoxCalories[1] / this.caloriesDay * 100,
+                this.eatBoxCalories[1]
+            ),
+            HomeEatBoxState(
+                EatTime.Dinner,
+                this.eatBoxCalories[2] / this.caloriesDay * 100,
+                this.eatBoxCalories[2]
+            ),
+            HomeEatBoxState(
+                EatTime.Snack,
+                this.eatBoxCalories[3] / this.caloriesDay * 100,
+                this.eatBoxCalories[3]
+            )
+        )
+    )
+}
+
+fun DateTime?.toString(): String = if (this == null) "Сегодня"
+else "${this.day}.${this.month}.${this.year}"
 
