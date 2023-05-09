@@ -57,6 +57,12 @@ class DefaultProductsRepository(
         }
     }
 
+    override suspend fun deleteAllProducts() {
+        withContext(coroutineDispatcher) {
+            productDao.deleteAllProducts()
+        }
+    }
+
     override fun getUnusedInfoStream(time: EatTime): Flow<List<ProductInfo>> {
         val used = productDao.getAllProductsStream().toExternal()
             .map { it.filter(time).map { p -> p.info } }

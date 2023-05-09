@@ -26,6 +26,9 @@ interface ProductDao {
     @Query("DELETE FROM $PRODUCT_TN WHERE id = :id AND time = :time")
     suspend fun deleteProduct(id: String, time: String)
 
+    @Query("DELETE FROM $PRODUCT_TN")
+    suspend fun deleteAllProducts()
+
     @Query("SELECT * FROM $INFO_TN")
     fun getAllInfosStream(): Flow<List<LocalInfo>>
 

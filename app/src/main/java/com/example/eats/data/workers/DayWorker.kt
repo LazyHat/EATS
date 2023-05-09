@@ -46,6 +46,7 @@ class DayWorker @AssistedInject constructor(
                     eatBoxCalories = currentCaloriesTime
                 )
             )
+            productRepository.deleteAllProducts()
             return Result.success()
         }
     }
